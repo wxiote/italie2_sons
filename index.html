@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Italie — 2 Cartes (Standalone)</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+    <!-- project styles (relative so it works with file:// and with Vite) -->
+    <link rel="stylesheet" href="src/assets/styles.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- Static-only loader: always load Mapbox UMD and the standalone module -->
+    <script>
+      (function () {
+        const sMap = document.createElement('script')
+        sMap.src = 'https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'
+        sMap.onload = function () {
+          // try to load injected config (created during build) if present, then load app
+          const cfg = document.createElement('script')
+          cfg.src = './static/config.js'
+          cfg.onload = function () {
+            loadApp()
+          }
+          cfg.onerror = function () { // missing config is fine: fallback to manual token UI or URL
+            loadApp()
+          }
+          document.head.appendChild(cfg)
+
+          function loadApp() {
+            const s = document.createElement('script')
+            s.type = 'module'
+            s.src = './static/standalone.js'
+            document.body.appendChild(s)
+          }
+        }
+        document.head.appendChild(sMap)
+      })();
+    </script>
+  </body>
+</html>

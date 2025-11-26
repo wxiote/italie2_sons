@@ -1,0 +1,17 @@
+/* Basic layout & styles for the standalone app */
+html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+
+.app-root{height:100vh;display:flex}
+#controls{width:320px;padding:16px;background:rgba(255,255,255,0.95);z-index:2;box-sizing:border-box}
+.maps{flex:1}
+
+/* two maps layout */
+.two-maps-root{height:100vh;display:flex}
+.map-half{flex:1;min-width:0}
+#map-left,#map-right{position:relative;height:100%}
+
+/* small UI touches */
+.error{position:fixed;left:12px;top:12px;background:#fff6f6;border:1px solid #ffa8a8;padding:10px;border-radius:6px;z-index:999}
+
+/* responsive helpers */
+@media (max-width: 640px){#controls{display:none}}

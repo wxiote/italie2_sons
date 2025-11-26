@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env.local
+.env
+.vite
+static/config.js
+static/config.js
