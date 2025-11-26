@@ -29,6 +29,8 @@ function copy(src, dest) {
 rmrf(publicDir)
 mkdir(publicDir)
 
+console.log('Preparing public/ from repo root:', root)
+
 // files to copy
 const items = [
   'index.html',
@@ -36,11 +38,24 @@ const items = [
   'src/assets'
 ]
 
+let copied = 0
 items.forEach(item => {
   const src = path.join(root, item)
   const dest = path.join(publicDir, item)
+  if (!fs.existsSync(src)) {
+    console.warn('skip (missing):', item)
+    return
+  }
   copy(src, dest)
+  copied++
+  console.log('copied:', item)
 })
+
+if (copied === 0) {
+  console.error('No files were copied into public/ — expected some of:', items.join(', '))
+  process.exitCode = 1
+  process.exit(1)
+}
 
 // optional: copy README to public for convenience
 copy(path.join(root, 'README.md'), path.join(publicDir, 'README.md'))
