@@ -60,10 +60,10 @@ Si tu veux rendre le site public sans demander le token aux utilisateur·ices, l
 npm run build
 
 # output directory (pour servir le site statique) :
-.
+public
 ```
 
-Le build exécute `scripts/inject-token.js` et écrit `static/config.js` contenant le token (non commité dans le repo). `index.html` charge `static/config.js` au runtime, donc les visiteur·ices ne voient pas le token dans les sources du dépôt et n'ont rien à fournir.
+Le build exécute `scripts/inject-token.js` et écrit `static/config.js` contenant le token (non commité dans le repo). Ensuite le build prépare un dossier de sortie `public/` (copie `index.html`, `static/` et `src/assets`) qui est déployé par Vercel. `index.html` charge `static/config.js` au runtime, donc les visiteur·ices ne voient pas le token dans les sources du dépôt et n'ont rien à fournir.
 
 Important : même si le token n'est pas dans le repo, il est nécessaire côté client pour Mapbox et reste visible par des usagers avancés (outils réseau). La restriction d'origine (Mapbox dashboard) empêche l'abus du token depuis d'autres domaines.
 
